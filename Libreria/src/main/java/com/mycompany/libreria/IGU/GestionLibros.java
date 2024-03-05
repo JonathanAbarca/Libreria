@@ -82,6 +82,11 @@ public class GestionLibros extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\Libreria\\img\\find.png")); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dutch801 Rm BT", 2, 36)); // NOI18N
         jLabel2.setText("Gestion de libros");
@@ -228,6 +233,16 @@ public class GestionLibros extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       String libro = txtBuscar.getText();
+       if(!libro.isEmpty()){
+            recargarTablaBuscarLibros(libro);
+       }else{
+            JOptionPane.showMessageDialog(null, "Ingrese un libro");
+       }
+       
+    }//GEN-LAST:event_btnBuscarActionPerformed
     
     public void cargarTabla(){
     
@@ -268,6 +283,37 @@ public class GestionLibros extends javax.swing.JFrame {
         
         
         
+    }
+    
+    public void recargarTablaBuscarLibros(String libro){
+        
+        DefaultTableModel miModeloTabla = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+       
+        tblLibros.getTableHeader().setFont(new Font("Segoe IU",getFont().BOLD,12));
+        tblLibros.getTableHeader().setOpaque(false);
+        tblLibros.getTableHeader().setBackground(new Color(32,136,203));
+        tblLibros.getTableHeader().setForeground(new Color(255,255,255));
+        tblLibros.setRowHeight(25);
+        
+        Object[] misTitulos = {"N°","Título","Autor","Editorial","Añadido"};
+        miModeloTabla.setColumnIdentifiers(misTitulos);
+        
+        List<Book> miListaBook= miControlador.buscarLibro(libro);
+        
+        if(!miListaBook.isEmpty()){
+            
+            for (Book book : miListaBook) {                
+                Object[] miBusObje = {book.getId_Book(),book.getTitulo(),book.getAutor(),book.getEditorial(),book.getFechaIngreso()}; 
+                miModeloTabla.addRow(miBusObje);
+            }
+            tblLibros.setModel(miModeloTabla);
+        }
+    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

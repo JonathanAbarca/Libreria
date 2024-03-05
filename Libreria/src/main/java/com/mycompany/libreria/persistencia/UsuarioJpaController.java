@@ -21,20 +21,16 @@ import javax.persistence.criteria.Root;
  * @author Jonathan Abarca
  */
 public class UsuarioJpaController implements Serializable {
-
+    
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
 
-    public UsuarioJpaController() {
-        
-        emf = Persistence.createEntityManagerFactory("libreriaPU");
-        
+    public UsuarioJpaController() {        
+        emf = Persistence.createEntityManagerFactory("libreriaPU");        
     }
     
-    
-
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
@@ -142,5 +138,29 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
+    
+    
+    /*public List<Usuario> buscarUsuarioRut(int rut){
+        System.out.println("control jpa usu"+rut);        
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT u FROM Usuario u WHERE u.rut = :rut";
+        //Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.rut = :rut", Usuario.class);
+        Query query = em.createQuery(jpql);
+        query.setParameter("Rut", rut);        
+        List<Usuario> listaUsu = query.getResultList();
+        em.close();
+        return listaUsu;  
+        
+    }*/
+    
+    public List<Usuario> buscarUsuarioRut(String rut) {
+    EntityManager em = getEntityManager();
+    String jpql = "SELECT u FROM Usuario u WHERE u.rut = :rut";
+    Query query = em.createQuery(jpql);
+    query.setParameter("rut",rut);  // Aquí utilizamos "rut" como el nombre del parámetro
+    List<Usuario> listaUsu = query.getResultList();
+    em.close();
+    return listaUsu;  
+}
     
 }

@@ -82,6 +82,11 @@ public class GestionUsuarios extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\Libreria\\img\\find.png")); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dutch801 Rm BT", 2, 36)); // NOI18N
         jLabel2.setText("Gestion de Usuarios");
@@ -217,6 +222,20 @@ public class GestionUsuarios extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String usuario = txtBuscar.getText();
+        if(!usuario.isEmpty()){
+        
+            cargatBusTabla(usuario);
+        
+        }else{
+        
+            JOptionPane.showConfirmDialog(null, "Ingrese un usuario");
+        
+        }
+            
+    }//GEN-LAST:event_btnBuscarActionPerformed
     
     public void cargarTabla(){
     
@@ -258,6 +277,34 @@ public class GestionUsuarios extends javax.swing.JFrame {
         
         
     }
+    private void cargatBusTabla(String usuario) {
+        DefaultTableModel miModeloTablaLi = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }            
+        };
+        
+       tblUsuarios.getTableHeader().setFont(new Font("Segoe IU", getFont().BOLD,12));
+       tblUsuarios.getTableHeader().setBackground(new Color(32,136,203));
+       tblUsuarios.getTableHeader().setForeground(new Color (255,255,255));
+       tblUsuarios.getTableHeader().setOpaque(false);
+       tblUsuarios.setRowHeight(25);
+       
+       Object[] miTitulosTabla = {"N°","Rut","Nombre","Dirección","Telefono","Correo"};
+       miModeloTablaLi.setColumnIdentifiers(miTitulosTabla);
+       List<Usuario> miListUsu = miControlador.buscarUsuarioRut(usuario);
+       if(!miListUsu.isEmpty()){
+           
+           for (Usuario usuario1 : miListUsu) {
+               Object[] miObjectUsu = {usuario1.getId_User(),usuario1.getRut(),usuario1.getNombre(),usuario1.getDireccion(),usuario1.getTelefono(),usuario1.getCorreo()};
+               miModeloTablaLi.addRow(miObjectUsu);
+           }
+        tblUsuarios.setModel(miModeloTablaLi);
+        tblUsuarios.getColumnModel().getColumn(0).setPreferredWidth(25);
+       }
+       
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -271,5 +318,7 @@ public class GestionUsuarios extends javax.swing.JFrame {
     private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
+    
     
 }

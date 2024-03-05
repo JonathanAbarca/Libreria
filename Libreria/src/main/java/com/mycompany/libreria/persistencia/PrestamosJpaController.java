@@ -27,18 +27,14 @@ public class PrestamosJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
-    public PrestamosJpaController() {
-        
-        emf = Persistence.createEntityManagerFactory("libreriaPU");
-        
-    }
-    
-    
-
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    public PrestamosJpaController() {
+        emf = Persistence.createEntityManagerFactory("libreriaPU");
+    }
+    
     public void create(Prestamos prestamos) {
         EntityManager em = null;
         try {
@@ -141,6 +137,15 @@ public class PrestamosJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    public List<Prestamos> buscarPrestamos() {
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT p FROM Prestamos p,Usuario u WHERE p.Id_User = u.id_User";
+        Query query = em.createQuery(jpql);
+        List<Prestamos> listaPrestamos = query.getResultList();
+        
+        //and Prestamos.id_Book = book.ID_BOOK
+        return listaPrestamos;  
     }
     
 }

@@ -199,7 +199,7 @@ public class NuevoLibro extends javax.swing.JFrame {
         
        // Mostrar un mensaje de diálogo con un mensaje y un título personalizado
         JOptionPane.showMessageDialog(null, "Libro guardado con éxito", "Guardar libro", JOptionPane.INFORMATION_MESSAGE);
-
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed

@@ -2,6 +2,7 @@
 package com.mycompany.libreria.IGU;
 
 import com.mycompany.libreria.logica.Controlador;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -215,8 +216,9 @@ public class NuevoUsuario extends javax.swing.JFrame {
      telefono = txtTelefono.getText();
      correo = txtCorreo.getText();
      
-     miControl.guardarUsuario(rut, nombre, direccion, telefono,correo);
-     
+     miControl.guardarUsuario(rut, nombre, direccion, telefono,correo);       
+     JOptionPane.showMessageDialog(null, "Usuario registrado");
+     this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed

@@ -3,6 +3,7 @@ package com.mycompany.libreria.persistencia;
 
 
 import com.mycompany.libreria.logica.Book;
+import com.mycompany.libreria.logica.Prestamos;
 import com.mycompany.libreria.logica.Usuario;
 import com.mycompany.libreria.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 public class ControladorPersistencia {   
     UsuarioJpaController miUsuarioJpaController = new UsuarioJpaController();
     BookJpaController miBookJpaController = new BookJpaController();
+    PrestamosJpaController miPrestamosJpaController = new PrestamosJpaController();
     
     public void guardarUsuario(Usuario miUsuario, String rut, String nombre, String direccion, String telefono, String correo, String fechaRegistro) {
         
@@ -35,8 +37,6 @@ public class ControladorPersistencia {
             Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-
     
     public List<Book> traerLibros() {
         
@@ -78,6 +78,26 @@ public class ControladorPersistencia {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List<Usuario> buscarUsuarioRut(String rut){        
+        return miUsuarioJpaController.buscarUsuarioRut(rut);    
+    }
+
+    public List<Book> buscarLibro(String nombre) {
+       return miBookJpaController.buscarLibroNombre(nombre);
+    }
+
+    public void reservarLibro(Prestamos miPrestamos, int libro, int usuario, String fecha) {
+        miPrestamos.setId_Book(libro);
+        miPrestamos.setId_User(usuario);
+        miPrestamos.setFecha_Prestamo(fecha);
+        System.out.println(" " + libro +" "+ usuario +" "+ fecha);
+        miPrestamosJpaController.create(miPrestamos);
+    }
+    
+    public List<Prestamos> buscarPrestamos(){ 
+        return miPrestamosJpaController.buscarPrestamos();
     }
     
 }

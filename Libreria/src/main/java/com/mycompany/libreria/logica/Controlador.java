@@ -1,7 +1,6 @@
 
 package com.mycompany.libreria.logica;
 
-import com.mycompany.libreria.IGU.GestionUsuarios;
 import com.mycompany.libreria.persistencia.ControladorPersistencia;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
  * @author Jonathan Abarca
  */
 public class Controlador {
-    Usuario miUsuario = null;    
     LocalDate fecha = null;
     ControladorPersistencia miControlPersis = new ControladorPersistencia();
 
@@ -75,6 +73,9 @@ public class Controlador {
         miUsuario.setDireccion(direccion);
         miUsuario.setTelefono(telefono);
         miUsuario.setCorreo(correo);
+        fecha = LocalDate.now();
+        String fechaHoy = fecha.toString();
+        miUsuario.setFecha_Ingreso(fechaHoy);
         miControlPersis.modificarUsuario(miUsuario);
     }
 
@@ -89,6 +90,26 @@ public class Controlador {
 
     public void eliminarUsuario(int idUsuario) {
         miControlPersis.eliminarUsuario(idUsuario);
+    }
+    
+    public List<Usuario> buscarUsuarioRut(String rut){        
+        return miControlPersis.buscarUsuarioRut(rut);   
+    }
+
+    public List<Book> buscarLibro(String nombre) {
+        return miControlPersis.buscarLibro(nombre);
+    }
+
+    public void reservarLibro(int id_libro,int id_usuario) { 
+        Prestamos miPrestamos = new Prestamos();
+        LocalDate miFecha = LocalDate.now();
+        String hoy = miFecha.toString();
+        System.out.println("" + id_libro + id_usuario + hoy);
+        miControlPersis.reservarLibro(miPrestamos, id_libro, id_usuario, hoy);
+    }
+    
+    public List<Prestamos> buscarPrestamo (){    
+        return miControlPersis.buscarPrestamos();    
     }
    
     

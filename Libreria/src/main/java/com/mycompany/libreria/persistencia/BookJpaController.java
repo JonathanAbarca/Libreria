@@ -5,6 +5,7 @@
 package com.mycompany.libreria.persistencia;
 
 import com.mycompany.libreria.logica.Book;
+import com.mycompany.libreria.logica.Usuario;
 import com.mycompany.libreria.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -152,5 +153,16 @@ public class BookJpaController implements Serializable {
             em.close();
         }
     }
+
+    public List<Book> buscarLibroNombre(String nombre) {
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT b FROM Book b WHERE b.titulo LIKE :nombre";
+        Query query = em.createQuery(jpql);
+        query.setParameter("nombre", "%" + nombre + "%");  // Agregar caracteres de comodín "%" aquí
+        List<Book> listaBook = query.getResultList();
+        em.close();
+        return listaBook;  
+    }
+    
     
 }

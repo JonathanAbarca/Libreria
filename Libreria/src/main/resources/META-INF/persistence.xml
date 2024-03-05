@@ -4,8 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mycompany.libreria.logica.Book</class>
     <class>com.mycompany.libreria.logica.Usuario</class>
-    <class>com.mycompany.libreria.logica.Prestamos</class>
     <class>com.mycompany.libreria.logica.Registro</class>
+    <class>com.mycompany.libreria.logica.Prestamos</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/libreria?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
