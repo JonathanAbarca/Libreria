@@ -2,12 +2,13 @@
 package com.mycompany.libreria.logica;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -24,21 +25,35 @@ public class Book implements Serializable {
     private String autor;
     private String editorial; 
     private String fechaIngreso;
-    private int disponible;    
+    private int disponible;
     
-
+    @OneToMany(mappedBy = "book")
+    private List<Prestamos> prestamos;
+    
+    
     public Book() {
     }
 
-    public Book(int id_Book, String titulo, String autor, String editorial, String fechaIngreso, int disponible) {
+    public Book(int id_Book, String titulo, String autor, String editorial, String fechaIngreso, int disponible, List<Prestamos> prestamos) {
         this.id_Book = id_Book;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.fechaIngreso = fechaIngreso;
         this.disponible = disponible;
+        this.prestamos = prestamos;
     }
 
+    
+
+    public List<Prestamos> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamos> prestamos) {
+        this.prestamos = prestamos;
+    }
+    
     public int getId_Book() {
         return id_Book;
     }

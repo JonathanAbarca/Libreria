@@ -100,17 +100,33 @@ public class Controlador {
         return miControlPersis.buscarLibro(nombre);
     }
 
-    public void reservarLibro(int id_libro,int id_usuario) { 
-        Prestamos miPrestamos = new Prestamos();
+    public void reservarLibro(int id_libro,int id_usuario) {        
+        
         LocalDate miFecha = LocalDate.now();
         String hoy = miFecha.toString();
-        System.out.println("" + id_libro + id_usuario + hoy);
-        miControlPersis.reservarLibro(miPrestamos, id_libro, id_usuario, hoy);
+        System.out.println(" " + id_libro +" " + id_usuario + " " + hoy);
+        miControlPersis.reservarLibro(id_libro, id_usuario, hoy);
+        miControlPersis.cambiarDispo(id_libro);
+        
     }
     
     public List<Prestamos> buscarPrestamo (){    
         return miControlPersis.buscarPrestamos();    
     }
-   
+    public Usuario buscarUsuario(int idUsuario) {
+        return miControlPersis.buscarUsuarioId(idUsuario);
+    }
+    public Book buscarLibro(int idBook) {
+        return miControlPersis.buscarLibroId(idBook);
+    }
+
+    public List<Prestamos> buscarPrestamo(String rutUsu) {
+        return miControlPersis.buscarPrestamos(rutUsu);
+    }
+
+    public Book buscarLibroReservado() {
+        return miControlPersis.buscarLibroReservado();
+    }
+    
     
 }

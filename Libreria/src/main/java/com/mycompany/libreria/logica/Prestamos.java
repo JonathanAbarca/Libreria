@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -20,19 +22,46 @@ public class Prestamos implements Serializable {
     private int id_Prestamo;
     @Basic
     private String fecha_Prestamo;
-    private int id_Book;
-    private int Id_User;
+    
+    
+    @ManyToOne
+    @JoinColumn(name = "Id_User")
+    private Usuario usuario;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_Book")
+    private Book book;
 
     public Prestamos() {
     }
 
-    public Prestamos(int id_Prestamo, String fecha_Prestamo, int id_Book, int Id_User) {
+    public Prestamos(int id_Prestamo, String fecha_Prestamo, int id_Book, int Id_User, Usuario usuario, Book book) {
         this.id_Prestamo = id_Prestamo;
         this.fecha_Prestamo = fecha_Prestamo;
-        this.id_Book = id_Book;
-        this.Id_User = Id_User;
+        //this.id_Book = id_Book;
+        //this.Id_User = Id_User;
+        this.usuario = usuario;
+        this.book = book;
     }
 
+    
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+    
     public int getId_Prestamo() {
         return id_Prestamo;
     }
@@ -49,7 +78,7 @@ public class Prestamos implements Serializable {
         this.fecha_Prestamo = fecha_Prestamo;
     }
 
-    public int getId_Book() {
+   /*public int getId_Book() {
         return id_Book;
     }
 
@@ -63,7 +92,7 @@ public class Prestamos implements Serializable {
 
     public void setId_User(int Id_User) {
         this.Id_User = Id_User;
-    }
+    }*/
     
     
     

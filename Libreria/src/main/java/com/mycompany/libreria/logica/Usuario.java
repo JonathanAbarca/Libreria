@@ -2,11 +2,13 @@
 package com.mycompany.libreria.logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -24,11 +26,15 @@ public class Usuario implements Serializable {
     private String direccion;
     private String telefono;
     private String fecha_Ingreso;
-
+    
+    @OneToMany(mappedBy = "usuario")
+    private List<Prestamos> prestamos;
+    
+    
     public Usuario() {
     }
 
-    public Usuario(int id_User, String rut, String nombre, String correo, String direccion, String telefono, String fecha_Ingreso) {
+    public Usuario(int id_User, String rut, String nombre, String correo, String direccion, String telefono, String fecha_Ingreso, List<Prestamos> prestamos) {
         this.id_User = id_User;
         this.rut = rut;
         this.nombre = nombre;
@@ -36,8 +42,19 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
         this.telefono = telefono;
         this.fecha_Ingreso = fecha_Ingreso;
+        this.prestamos = prestamos;
     }
 
+        
+
+    public List<Prestamos> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamos> prestamos) {
+        this.prestamos = prestamos;
+    }
+    
     public int getId_User() {
         return id_User;
     }

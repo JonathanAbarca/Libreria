@@ -4,7 +4,9 @@
  */
 package com.mycompany.libreria.persistencia;
 
+import com.mycompany.libreria.logica.Book;
 import com.mycompany.libreria.logica.Prestamos;
+import com.mycompany.libreria.logica.Usuario;
 import com.mycompany.libreria.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -48,6 +50,24 @@ public class PrestamosJpaController implements Serializable {
             }
         }
     }
+    public void create(Prestamos prestamos, Book book, Usuario usuario) {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        em.getTransaction().begin();
+        
+        // Asignar el objeto Book y Usuario al objeto Prestamos
+        prestamos.setBook(book);
+        prestamos.setUsuario(usuario);
+        
+        em.persist(prestamos);
+        em.getTransaction().commit();
+    } finally {
+        if (em != null) {
+            em.close();
+        }
+    }
+}
 
     public void edit(Prestamos prestamos) throws NonexistentEntityException, Exception {
         EntityManager em = null;
@@ -140,12 +160,54 @@ public class PrestamosJpaController implements Serializable {
     }
     public List<Prestamos> buscarPrestamos() {
         EntityManager em = getEntityManager();
-        String jpql = "SELECT p FROM Prestamos p,Usuario u WHERE p.Id_User = u.id_User";
+        String jpql = "SELECT p FROM Prestamos p JOIN p.usuario u ORDER BY p.fecha_Prestamo DESC";        
         Query query = em.createQuery(jpql);
-        List<Prestamos> listaPrestamos = query.getResultList();
-        
-        //and Prestamos.id_Book = book.ID_BOOK
-        return listaPrestamos;  
+
+        try {
+            List<Prestamos> listaPrestamos = query.getResultList();        
+            return listaPrestamos;  
+        } catch (Exception ex) {
+            // Manejar la excepción aquí
+            ex.printStackTrace(); // o puedes usar otro método para manejar la excepción
+            return null; // O devuelve una lista vacía o maneja la excepción de otra manera según tu lógica de aplicación
+        } finally {
+            em.close(); // Asegúrate de cerrar el EntityManager en el bloque finally
+        }
     }
-    
+
+    /*public List<Prestamos> buscarPrestamos(String rutUsu) {
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT p FROM Prestamos p, Usuario u WHERE u.rut = :rutUsu";
+        
+        Query query = em.createQuery(jpql);
+        query.setParameter("rutUsu", rutUsu);
+        try {
+            List<Prestamos> listaPrestamos = query.getResultList();        
+            return listaPrestamos;  
+        } catch (Exception ex) {
+            // Manejar la excepción aquí
+            ex.printStackTrace(); // o puedes usar otro método para manejar la excepción
+            return null; // O devuelve una lista vacía o maneja la excepción de otra manera según tu lógica de aplicación
+        } finally {
+            em.close(); // Asegúrate de cerrar el EntityManager en el bloque finally
+        }
+    }*/
+   
+    public List<Prestamos> buscarPrestamos(String rutUsu) {
+        EntityManager em = getEntityManager();
+        String jpql = "SELECT p FROM Prestamos p JOIN p.usuario u WHERE u.rut = :rutUsu";
+
+        Query query = em.createQuery(jpql);
+        query.setParameter("rutUsu", rutUsu);
+        try {
+            List<Prestamos> listaPrestamos = query.getResultList();        
+            return listaPrestamos;  
+        } catch (Exception ex) {
+            // Manejar la excepción aquí
+            ex.printStackTrace(); // o puedes usar otro método para manejar la excepción
+            return null; // O devuelve una lista vacía o maneja la excepción de otra manera según tu lógica de aplicación
+        } finally {
+            em.close(); // Asegúrate de cerrar el EntityManager en el bloque finally
+        }
+    }
 }

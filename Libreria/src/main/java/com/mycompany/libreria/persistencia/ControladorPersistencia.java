@@ -88,16 +88,48 @@ public class ControladorPersistencia {
        return miBookJpaController.buscarLibroNombre(nombre);
     }
 
-    public void reservarLibro(Prestamos miPrestamos, int libro, int usuario, String fecha) {
-        miPrestamos.setId_Book(libro);
-        miPrestamos.setId_User(usuario);
-        miPrestamos.setFecha_Prestamo(fecha);
-        System.out.println(" " + libro +" "+ usuario +" "+ fecha);
+    
+    public void reservarLibro(int idLibro, int idUsuario, String fecha) {
+        // Crear objetos Book y Usuario
+        Book book = new Book();
+        book.setId_Book(idLibro); // Configurar el ID del libro
+
+        Usuario usuario = new Usuario();
+        usuario.setId_User(idUsuario); // Configurar el ID del usuario
+
+        // Crear objeto Prestamos y configurar los valores
+        Prestamos miPrestamos = new Prestamos();
+        miPrestamos.setBook(book); // Asociar el objeto Book con el Prestamos
+        miPrestamos.setUsuario(usuario); // Asociar el objeto Usuario con el Prestamos
+        miPrestamos.setFecha_Prestamo(fecha); // Configurar la fecha de préstamo
+
+        // Llamar al método create en el controlador de persistencia
         miPrestamosJpaController.create(miPrestamos);
     }
     
     public List<Prestamos> buscarPrestamos(){ 
         return miPrestamosJpaController.buscarPrestamos();
     }
-    
+
+    public Usuario buscarUsuarioId(int idUsuario) {
+                
+        return miUsuarioJpaController.findUsuario(idUsuario);
+    }
+
+    public Book buscarLibroId(int idBook) {
+        return miBookJpaController.findBook(idBook);
+    }
+
+    public void cambiarDispo(int id_libro) {
+        miBookJpaController.cambiarDispo(id_libro);
+    }
+
+    public List<Prestamos> buscarPrestamos(String rutUsu) {
+        return miPrestamosJpaController.buscarPrestamos(rutUsu);
+    }
+
+    public Book buscarLibroReservado() {
+        return miBookJpaController.buscarLibroReservado();
+    }
+
 }

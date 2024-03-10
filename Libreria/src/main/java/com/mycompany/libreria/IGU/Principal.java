@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jonathan Abarca
  */
-public class Principal extends javax.swing.JFrame {
+public final class Principal extends javax.swing.JFrame {
     
     
     Controlador miControl = null;    
@@ -78,11 +78,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         lblDisponible = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
         tblPrestamos = new javax.swing.JTable();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel6 = new javax.swing.JPanel();
         btnReservarLibro = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBusPrestados = new javax.swing.JTable();
+        btnBuscarPres = new javax.swing.JButton();
+        txtBuscarprest = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -91,7 +97,6 @@ public class Principal extends javax.swing.JFrame {
         mnuiModLibro = new javax.swing.JMenuItem();
         mnuiModUsuario = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         jRadioButton1.setText("jRadioButton1");
@@ -210,6 +215,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 2, 18))); // NOI18N
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jPanel3.setMaximumSize(new java.awt.Dimension(306, 260));
         jPanel3.setMinimumSize(new java.awt.Dimension(306, 260));
@@ -281,6 +287,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Libro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 2, 18))); // NOI18N
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jPanel4.setMaximumSize(new java.awt.Dimension(306, 260));
 
@@ -365,7 +372,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Prestamos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 2, 18))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ultimos prestamos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 2, 18))); // NOI18N
 
         tblPrestamos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -378,27 +385,23 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
-        tblPrestamos.setColumnSelectionAllowed(true);
-        tblPrestamos.setName(""); // NOI18N
-        tblPrestamos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblPrestamosMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tblPrestamos);
-        tblPrestamos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(tblPrestamos);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -429,6 +432,67 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 2, 14)); // NOI18N
+        jLabel3.setText("Buscar prestados :");
+
+        tblBusPrestados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tblBusPrestados.setAutoscrolls(false);
+        tblBusPrestados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBusPrestadosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblBusPrestados);
+
+        btnBuscarPres.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        btnBuscarPres.setText("Buscar");
+        btnBuscarPres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPresActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(txtBuscarprest, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscarPres, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarPres, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarprest, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -444,8 +508,10 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,7 +527,10 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 2, Short.MAX_VALUE))
                     .addComponent(jSeparator3)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -528,11 +597,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setText("Prestamos");
         jMenu3.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
 
-        jMenuItem3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\Libreria\\img\\bookAlqui.png")); // NOI18N
-        jMenuItem3.setText("Nuevo");
-        jMenu3.add(jMenuItem3);
-
         jMenuItem4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan Abarca\\Documents\\NetBeansProjects\\Libreria\\img\\bookregis.png")); // NOI18N
         jMenuItem4.setText("Registros");
@@ -546,7 +610,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1226, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1211, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -638,7 +702,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tblLibrosMouseClicked
 
     private void btnReservarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarLibroActionPerformed
-        miControl = new Controlador();
+        miControl = new Controlador();        
         
         if(tblLibros.getSelectedRow() != -1 && tblUsu.getSelectedRow() != -1){            
             int id_libro = Integer.parseInt(String.valueOf(tblLibros.getValueAt(tblLibros.getSelectedRow(),0)));
@@ -652,6 +716,7 @@ public class Principal extends javax.swing.JFrame {
             
             cargarTablas();
             vaciarLabel();
+            buscarPrestamos();
             JOptionPane.showMessageDialog(null, "Registrado correctamente");
             
         }else{
@@ -663,9 +728,16 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnReservarLibroActionPerformed
 
-    private void tblPrestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPrestamosMouseClicked
+    private void tblBusPrestadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBusPrestadosMouseClicked
+        int columnaSelecionada = (int) tblBusPrestados.getValueAt(tblBusPrestados.getSelectedRow(), 0);
+        System.out.println(""+ columnaSelecionada);
+    }//GEN-LAST:event_tblBusPrestadosMouseClicked
+
+    private void btnBuscarPresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPresActionPerformed
+        String miRutUsu = txtBuscarprest.getText();
+        integrarPrestados(miRutUsu);
         
-    }//GEN-LAST:event_tblPrestamosMouseClicked
+    }//GEN-LAST:event_btnBuscarPresActionPerformed
     
     
     public void buscarUsuarioRut(String rut){
@@ -779,6 +851,25 @@ public class Principal extends javax.swing.JFrame {
         tblUsu.getColumnModel().getColumn(1).setPreferredWidth(280); //Rut
         tblUsu.getColumnModel().getColumn(2).setPreferredWidth(180); //Nombre
         
+        DefaultTableModel miEstePres = new DefaultTableModel();
+        String[] objetosPres = {"N°","Fecha salida","Rut","Nombre","Titulo","Autor"};
+        miEstePres.setColumnIdentifiers(objetosPres);
+        
+        tblBusPrestados.getTableHeader().setFont(new Font("Segoe IU",getFont().ITALIC,12) );
+        tblBusPrestados.getTableHeader().setOpaque(false);
+        tblBusPrestados.getTableHeader().setBackground(new Color(32,136,203));
+        tblBusPrestados.getTableHeader().setForeground(new Color(255,255,255));
+        tblBusPrestados.setRowHeight(30);
+        
+        tblBusPrestados.setModel(miEstePres);
+        tblBusPrestados.getColumnModel().getColumn(0).setPreferredWidth(40);  //id 
+        tblBusPrestados.getColumnModel().getColumn(1).setPreferredWidth(175); //fecha
+        tblBusPrestados.getColumnModel().getColumn(2).setPreferredWidth(170); //rut
+        tblBusPrestados.getColumnModel().getColumn(3).setPreferredWidth(210); //nombre
+        tblBusPrestados.getColumnModel().getColumn(4).setPreferredWidth(300); //titulo
+        tblBusPrestados.getColumnModel().getColumn(5).setPreferredWidth(180); //autor
+        
+        
     }
     
     private void vaciarLabel(){
@@ -817,8 +908,8 @@ public class Principal extends javax.swing.JFrame {
         if (!misPrestamos.isEmpty()) {
         for (Prestamos miPrest : misPrestamos) {
 
-            Usuario miUsuario = miControl.cargarParaModUsuario(miPrest.getId_User());
-            Book misbook = miControl.cargarParaModificar(miPrest.getId_Book());
+            Usuario miUsuario = miControl.cargarParaModUsuario(miPrest.getUsuario().getId_User());
+            Book misbook = miControl.cargarParaModificar(miPrest.getBook().getId_Book());
 
             Object[] miListaFinal = {miPrest.getId_Prestamo(), miPrest.getFecha_Prestamo(), miUsuario.getRut(), miUsuario.getNombre(), misbook.getTitulo(), misbook.getAutor()};
             miModeloTablaPres.addRow(miListaFinal);
@@ -831,7 +922,7 @@ public class Principal extends javax.swing.JFrame {
         
         tblPrestamos.setModel(miModeloTablaPres);
         tblPrestamos.getColumnModel().getColumn(0).setPreferredWidth(40);  //id 
-        tblPrestamos.getColumnModel().getColumn(1).setPreferredWidth(170); //fecha
+        tblPrestamos.getColumnModel().getColumn(1).setPreferredWidth(187); //fecha
         tblPrestamos.getColumnModel().getColumn(2).setPreferredWidth(170); //rut
         tblPrestamos.getColumnModel().getColumn(3).setPreferredWidth(210); //nombre
         tblPrestamos.getColumnModel().getColumn(4).setPreferredWidth(300); //titulo
@@ -841,10 +932,43 @@ public class Principal extends javax.swing.JFrame {
     
     }
     
-    
+    private void integrarPrestados(String rutUsu) {
+        miControl = new Controlador();
+        DefaultTableModel miModeloIntePres = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int colum) {
+                return false;
+            }
+        };
+
+        String[] objetosPress = {"N°", "Fecha salida", "Rut", "Nombre", "Título", "Autor"};
+        miModeloIntePres.setColumnIdentifiers(objetosPress);
+        
+        List<Prestamos> miListaPrestamos = miControl.buscarPrestamo(rutUsu);
+        if(!miListaPrestamos.isEmpty()){
+            for (Prestamos prestamos : miListaPrestamos) {
+                Usuario usuario = miControl.buscarUsuario(prestamos.getUsuario().getId_User());
+                Book libro = miControl.buscarLibro(prestamos.getBook().getId_Book());
+
+                Object[] misPrestadosdis = {prestamos.getId_Prestamo(), prestamos.getFecha_Prestamo(), usuario.getRut(), usuario.getNombre(), libro.getTitulo(), libro.getAutor()};
+                miModeloIntePres.addRow(misPrestadosdis);
+            }
+        }else{
+
+                JOptionPane.showMessageDialog(null, "No hay datos para mostrar");
+            }
+        tblBusPrestados.setModel(miModeloIntePres);
+        tblBusPrestados.getColumnModel().getColumn(0).setPreferredWidth(40);  //id 
+        tblBusPrestados.getColumnModel().getColumn(1).setPreferredWidth(187); //fecha
+        tblBusPrestados.getColumnModel().getColumn(2).setPreferredWidth(170); //rut
+        tblBusPrestados.getColumnModel().getColumn(3).setPreferredWidth(210); //nombre
+        tblBusPrestados.getColumnModel().getColumn(4).setPreferredWidth(300); //titulo
+        tblBusPrestados.getColumnModel().getColumn(5).setPreferredWidth(180); //autor
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarLibros;
+    private javax.swing.JButton btnBuscarPres;
     private javax.swing.JButton btnReservarLibro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
@@ -853,6 +977,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -863,7 +988,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -871,10 +995,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -889,10 +1015,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JMenuItem mnuiModLibro;
     private javax.swing.JMenuItem mnuiModUsuario;
+    private javax.swing.JTable tblBusPrestados;
     private javax.swing.JTable tblLibros;
     private javax.swing.JTable tblPrestamos;
     private javax.swing.JTable tblUsu;
     private javax.swing.JTextField txtBuscarLibros;
     private javax.swing.JTextField txtBuscarRut;
+    private javax.swing.JTextField txtBuscarprest;
     // End of variables declaration//GEN-END:variables
 }
